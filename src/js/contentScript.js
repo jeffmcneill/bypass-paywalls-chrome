@@ -2,7 +2,15 @@ if (!matchDomain(['seekingalpha.com', 'sfchronicle.com', 'cen.acs.org'])) {
   window.localStorage.clear();
 }
 
-if (matchDomain('rep.repubblica.it')) {
+if (matchDomain('estadao.com.br')) {
+  setTimeout(function () {
+    const paywall = document.querySelector('#paywall-wrapper-iframe-estadao');
+    const body = document.querySelector('html');
+
+    removeDOMElement(paywall);
+    body.removeAttribute('style');
+  }, 300); // Delay (in milliseconds)
+} else if (matchDomain('rep.repubblica.it')) {
   if (window.location.href.includes('/pwa/')) {
     setTimeout(function () {
       window.location.href = window.location.href.replace('/pwa/', '/ws/detail/');
@@ -327,6 +335,9 @@ if (matchDomain('rep.repubblica.it')) {
       }
     }
   }
+} else if (matchDomain('nzz.ch')) {
+  const paywall = document.querySelector('.dynamic-regwall');
+  removeDOMElement(paywall);
 }
 
 function matchDomain (domains) {
